@@ -128,6 +128,7 @@
 	6.为了避免xss攻击,不要将用户 输入的内容 v-html 到网页
 	7.{{data}} 并不能作为attribute,需要用v-bind
 		v-bind:id="app"
+		v-bind:href="link"
 		v-bind:disabled="isDisabled"   //只有isDisabled 是true的情况下才会被渲染出来,剩下的都不会被渲染出来
 	8.{{}}
 			//里面可以进行js语句
@@ -136,6 +137,11 @@
 			{{ ok ? 'yes' : 'no' }}
 			<div v-bind:id="'list_'+id"></div>
 			//需要注意的是 只能是单个表达式,if或声明变量都是无效的
+			//表达式放在沙盒里,并且不能访问全局变量
+	9.v-bind缩写
+		:id="app"
+	10.v-on缩写
+		@lick="fun"
 
 注意事项:
 		1.想要生效都得放在el的里面
