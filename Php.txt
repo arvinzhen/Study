@@ -1,0 +1,194 @@
+﻿locallhost： 
+默认文件：index.php index.htm index.html
+echo:输出
+<?php ?>
+
+
+define('name',value);之后不准再定义name 例如：define('PI',3.14);
+//类型 type
+$a = 13;
+echo gettype($a);//Integer
+settype($a,'double');
+echo gettype($a);//double
+
+var_dump();//显示变量的相关属性
+
+声明一个Null变量时：并不会分配内存
+
+$arrayname = array(); 
+$arrayname = array[];  //PHP version >=5.4
+
+sizeof($arrayname);
+count($arrayname);
+foreach://只能用来循环数组   //foreach ($arrayname as $key => $value) {
+	$sum += $value;
+}   //可以不写$key  //$value可以改成别的$v
+
+把数组全打印出来：var_dump($array_name);
+				print_r($array_name);
+
+
+switch 里面的break没写的话，从选择到判断项目开始从上到下直到有break出现为止输出
+
+Date();
+		1.通过date()函数获取时间后，你会发现小时时间不对，比现在的时间小8个小时，无论用H，还是用h都一样，这个是因为当前获取的是格林威治时间，与北京时间相差8小时。
+		//记得再括号
+		2.参数值：'d' 01-31
+				  'D' Mon-Sun
+				  'j' 1-31
+				  'l' Sunday-Saturday (lowwercase L) 
+				  'N' 1(for Monday)-7(For Sunday)
+				  'S' 如:st nd rd th  //返回序数的尾两位， work well with 'j'
+				  'w' 0(For Sunday)-6(Saturday) // Numberic representation 数字表示 
+				  'z' 0-365   //The day of year(starting from 0) 
+				  'W' 43//一年的第43周   //week number of year,weeks starting on Monday 
+				  'F' January-December  // A full textual representation of a month 
+				  'm' 01-12   //Numbric representation of a month,with leading zeros 
+				  'M' Jan-Dec   // A short textual representation of a month,three letter 
+				  'n' 1-12   //Numberic representation of a month,without leading zeros
+				  't' 28-31   //Number of days in the given month
+				  'L' 0-1   //1为闰年，0为平年
+				  'o' 1998   //返回年份
+				  'Y' 1998   //返回年份
+				  'a' am or pm    //小写的 上午 或 下午
+				  'A' AM or PM    //大写的 上午 或 下午
+				  'B' 000-999   //swatch Internat time
+				  'g' 1-12   //12 hours format
+				  'G' 0-23   //24 hours format
+				  'h' 01-12   //12 hours format,with leading zeros
+				  'H' 00-23   //24 hours format,with leading zeros
+				  'i' 00-59   //minutes with leading zeros
+				  's' 00-59   //seconds with leading zeros
+				  'u' 6位数
+				  'v' 3位数
+				  'c' 2004-02-12T15:19:21+00:00
+				  'r' Thu,21 Dec 2004 16:21:01+0200
+				  'U' see also time();
+
+
+
+				  一般先 创建一个变量存一个时间戳，再通过 y m d h i s 小写为数字，大写为英文
+
+逻辑运算符:
+		  1.大于 小于 等于 不等于 == !=
+		  2.强类型不等于 === !==
+		  与：有0为0，全1为1
+		  或：有1为1，全0为0
+		  非：
+
+
+
+函数：
+把字符串预先存在一个字串变量里面：比如要在网页里面加一个table就可先把东西写在$str里面，然后在<?php echo $str; ?>即可
+如果函数return 一个数组，就不能echo 一个数组
+形参如果赋值，则视默认值//实参的时候可以不同写
+
+
+echo "<script>alert('successful');location.href='dizhi';</script>";
+
+location.href='dizhi'; //当alert确认后 再跳转到指定地址
+
+$sql = "select ziduanming form table order by primarykeyziduanming asc limit 1,10";
+
+
+
+上传文件：form 里面 action是目标php   method 是post  enctype是multipart/form-data
+		接收是$_FILES  并且如果input type="file"  没加name的话 默认索引 是pic
+		存文件是move_uploaded_file(tmp_name,destination);//tmp_name是缓存的图片名字     
+														//destination是存储地址（记得加文件名）
+														地址+文件名：c:/dizhi/hah.jpg
+
+$_FILES["file"]["name"] - 被上传文件的名称
+$_FILES["file"]["type"] - 被上传文件的类型
+$_FILES["file"]["size"] - 被上传文件的大小，以字节计
+$_FILES["file"]["tmp_name"] - 存储在服务器的文件的临时副本的名称
+$_FILES["file"]["error"] - 由文件上传导致的错误代码
+
+
+删除真实文件： unlink(destination);  //删除指定文件 destination 示例："./image/indian.jpg"
+
+函数: 让函数在这里停顿   不向下执行  ：die()||exit();
+	  move_uploaded_file(filename,destination)
+	  in_array($arr);//是否在数组中存在
+	  <?php
+			$people = array("Bill", "Steve", "Mark", "David");
+
+			if (in_array("Mark", $people))   //in_array[当前数组，总数组]
+			  {
+			  echo "匹配已找到";
+			  }
+			else
+			  {
+			  echo "匹配未找到";
+			  }
+	?>
+
+	随机函数： rand(a,b);随机返回的是a到b之间的整数  //整数
+
+
+	睡眠 等待 <?php
+echo date('h:i:s') . "<br />";
+
+//暂停 10 秒
+sleep(10);
+
+//重新开始
+echo date('h:i:s');
+
+?>
+
+
+<script>
+		function setSomethingSelected (selectId, selectValue) {
+			var select = document.getElementById(selectId);        //需要注意的是 JQUERY写的话 记得在getElementByName 后面加[0]不然选不中
+			for (var i = 0; i < select.options.length; i++) {
+				if (select.options[i].value == selectValue) {
+					select.options[i].selected = true;            //需要注意的是这里的true不是判断，是赋值，一个等号
+					break;
+				}
+			}
+		}
+</script>
+
+
+
+Errors:
+		1.Constan PI already defined
+		常量已定义
+		2.Undefined variable:
+		变量没有声明
+		3.syntax error, unexpected '$variable' excepting ;
+
+
+
+
+
+
+
+MVC:
+	M:model 模型
+		负责处理数据库信息
+		位置:application/models
+	V: view  视图
+		负责渲染视图,即html
+		位置:application/views
+	C: controller 控制器
+		负责调度 模型和视图
+		位置:application/controllers
+
+
+URL:
+	域名/入口文件/控制器名/控制器里面的函数名
+	http://ci.cn/index.php/welcome/index
+
+	入口文件: 项目下面的index.php
+
+
+
+helper里面存放 自定义函数 或者方法
+function isLogin(){
+	//code check login
+}
+可以把isLogin放在构造函数里面就好,会先于其他先执行
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');

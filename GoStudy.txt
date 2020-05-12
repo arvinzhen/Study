@@ -1,0 +1,104 @@
+1.
+	变量申明:(可以不用声明类型,系统会自动推断类型)
+		1.声明单个变量
+			var name type; //ep: var age int;
+		2.声明单个变量并且初始化
+			var name type = variable; //ep: var age int = 20;
+		3.自动化 推断type
+			var name = initialvalue; //ep: var age = 20;
+		4.声明多个变量
+			var name1,name2 type = initialvalue1,initialvalue2;
+		4.1声明多个变量
+			var name1,name2 = "ceshi type",2; //可以声明多个不同类型的
+		5.声明多个变量
+			var (
+				name1 = initialvalue1
+				name2 = initialvalue2
+			)
+		6.声明多个变量
+			var (
+				name1 int
+				name2 string
+			)
+		7.声明多个变量
+			var (
+				name1 int = 10
+				name String = "asdas"
+			)
+		8.简短声明
+			name := initialvalue
+		9.简短多变量
+			name1,name2  = "ceshi",2
+
+
+	注意事项:
+			1.如果声明了变量没初始化,会被赋0
+				Boolean False;
+				Integer 0;
+				Floating Point 0;
+				Complex 0i;
+				String "";//(empty String)
+				Pointer nil;
+			2.简短声明要求:1.所有的变量都要有初始值2.需要至少一个变量名未被声明3.已声明的被新值覆盖
+			3.不能转换类型的变量不能给其他类型变量赋值
+
+2.
+	变量类型
+			1.布尔值
+				bool
+			2.数值型
+				int8,int16,int32,int64,int              %T(打印类型) %d(字节大小) (
+														unsafe包里面有Sizeof,unsafe包应小心使用,因为可能会造成移植性问题)
+				uint8,uint16,uint32,uint64,uint         %T(打印类型) (用法 unsafe,Sizeof(变量名))8是64 4是32
+				float32,float64		(一般为定义类型的默认为float64)	%T(打印类型)
+				complex64,complex128
+				byte 是 uint8的别名
+				rune 是 int32的别名
+			3.字符串
+				string  +  拼接符号
+
+	注意事项:
+			1.	fmt.PrintLn输出的bool型变量,会转成string true或false 而不是1或0
+			2.	int8 [-128,127] 8位 2^7 符号占一位               1byte
+			3.	int16 [-32768,32767] 16位 2^15 符号占一位        2byte
+			4.	int32 [-2147483648,2147483647] 32位 2^31 符号占一位        4byte
+			5.	int64 [-9223372036854775808,9223372036854775807] 64位 2^63 符号占一位        8byte
+			6.	int 取决于操作系统 32位 或者 64位
+			7.	无符号的uintn [0,2的n次方-1]
+			8.	浮点型
+
+			9.复数
+				1.complex64 实部和虚部都是float32类型
+				2.complex128 实部和虚部都是float64类型
+				内建函数 func complex(r, i FloatType) ComplexType
+				例如: c1 := complex(5, 7)
+					  c2 := 8 + 25i
+					  c3 = c1 * c2
+					  输出的样式为:   (8+25i)    ep://带括号
+			10.因为没有自动类型提升或者类型转换
+				ep: a,b := 1,2.5   //一个是int64 //一个是float64
+				所以 a + b 是不被允许的
+				通过手动的类型转换 a + int(b) 转换后 浮点的将会被去掉浮点 但是变量的值和类型都没变 相当于存在一份拷贝
+
+
+3.
+	常量
+		1.constant 最低精度是 256bit 所以是精确的
+		2.声明是 必须初始化
+		3.初始化后 即 不可修改
+		4.甚至 const b = math.Sqrt(4) //都是不允许的   //声明 编译是就赋值 但是 函数是在运行是赋值的
+		5.声明常量是如果不带类型的话,那么在用到常量是,从变量值得默认类型中获取
+			const str = "ceshi" //此时str是无类型的 ,但是在 运行到 str2 := "ceshi232" + str //时,会从ceshi的默认类型提供类型
+		6.也可以在声明是 就提供类型 const str string = "ceshi"
+		7.Go中 "" 里面是常量
+				ep : type newtypestring string
+					var ceshistr newtypestring = "ceshi"
+					var str = "hello"
+					虽然此时得分str是string类型,ceshistr是newtypestring(是string的别名),但是两个不是同一类型,所以 两个变之间的赋值和拼接之类的操作会被拒绝
+
+		8.布尔常量
+			const Trboll = true
+			type mybool bool
+			var defb = Trboll
+			var defb2 myboll = Trboll
+			defb = defb2 //发生错误 同上

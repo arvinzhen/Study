@@ -1,0 +1,159 @@
+内核（渲染引擎）：	1.Trident（IE内核）
+		2.Gecko（Firefox火狐）
+		3.Webkit(Safari苹果，Android默认浏览器)
+		4.Chromium/Bink（Chrome Blink是webkit的分支）
+		5.Presto（Opera欧朋浏览器   挪威公司）
+移动端的内核都是自带浏览器的内核
+
+
+
+web标准：W3C和其它标准化组织定制的一系列标准的集合。
+		主要包括 结构（Structure）：对网页进行整理和分类，主要是XML和XHTML
+				表现（Presentation）：设置网页元素的版式、颜色、大小等外观样式，主要指CSS
+				行为（Behavior）：指网页模型的定义及交互的编写，主要包括DOM和CMAScript
+	所以标准的网页源码的结构是：HTML，css，js
+
+HTML：Hyper Text Markup Language
+		超   文本  标签   语言
+
+左右尖括号<>为标签
+
+
+
+<!DOCTYPE html>    //表示文档类型，是用HTML5写的
+<html lang="en">   //<html>根标签
+	<head>  //头标签
+		<meta charset="UTF-8">     //字符集   gb2312表示简体中文  BIG5繁体中文   GBK包括全部的中文字符，是gb2312的扩展    UTF-8包括所有的国家需要用到的字符 是最大的字符集
+		<title></title>  //标题标签
+	</head>
+	<body>  //主题标签
+	</body>
+</html>
+
+
+
+网页组成元素：文字 图片 链接 视频 音频...
+大部分： 双标签，带关闭符号正斜杆/
+很少：单标签很少 hr br img base
+
+标签之间的关系：嵌套和并列
+
+<p> 段落
+
+
+文本格式化标签：  加粗 <b> ----加粗
+     			 加强语气 <strong> ------加粗
+                 斜体 <i>------倾斜
+                 删除线 <s>和<del>---------删除线//默认<del>
+                 下划线 <u>和<ins>-----------下划线//默认<ins>
+
+优先级：就近原则(相同level，谁靠近就是谁)
+!important  优先级最高↓
+标签中的style属性↓
+id选择器 ↓
+类选择器↓
+html选择器↓
+
+
+标签img：
+		src="地址"
+		alt-----当图片不显示时，表现的文字
+		title-----当鼠标悬停在图片上的时候显示的文字
+		width/height-----如果要等比例缩放的话，写一个就好
+		border-------边框
+
+标签a:
+		href-----链接地址
+		#id_name------衔接到锚点//需要在id_name
+		target------打开方式  _blank新窗口
+							  _self当前窗口
+
+特殊字符：
+		空格----&nbsp;
+		<-------&lt;
+		>-------&gt;
+		&------&anp;
+		￥-----&yen;
+		©------&copy;
+		®------&reg;
+		°------&deg;
+		±------&plusmn;
+		×------&times;
+		÷------&divide;
+		²------&sup2;
+		³------&sup3;
+
+注释：
+		<!--  单，多行  注释 -->
+
+路径：
+	一切以相对主页面展开
+	../  ------   返回上一级
+	C:\web\images\test_demo.jpeg -------绝对路径
+	http://www.????.??/images/test_demo.jpeg -----绝对路径
+
+
+无序表:ul
+		ul的根系不能有除li以外的东西
+		li根系能有其他的标签
+
+有序表：ol
+
+自定义列表：dl
+		   dt ---自定义列表项目
+		   dd ---定义自定义列表的描述：在dt的下一行的右移tap的位置描述
+
+表格：
+	caption------表头标题
+	tr-----行：里面只能放td，可被<thead><tr></tr></thead>
+	td里面可以放其他的标签
+	th---表头：只能放在第一行第一列
+	合并行(Row)-------rowspan="x"合并x行    //在td里面添加
+	合并列(Col)-------colspan="y"合并y列    //在td开面添加
+
+表单(Form)：
+	控件：
+		1.input控件：               //单标签
+					type:
+						text:单行文本输入框
+						password:密码输入框
+						radio:单选按钮    //和name一起用
+						checkbox:复选框
+						button:普通按钮
+						submit:提交按钮
+						reset:重置按钮
+						image:图像形式的提交按钮
+						file:文件域----//打开本地计算机
+					name:
+						自定义
+							控件的名称
+					value:
+						自定义
+							input控件的默认文本值
+					size:
+						正整数
+							input控件在页面中的显示宽度
+					checked
+						checked
+							定义选择控件默认被选中的项
+					maxlength
+						正整数
+							控件允许输入的最多字符数
+		2.select控件：
+					option:选项
+		3.textarea控件：
+					输入文本域
+		4.button控件：
+					submit：提交按钮
+					reset:重置按钮
+					image:图片按钮
+					file:打开本地文件按钮
+
+
+
+
+
+
+
+
+

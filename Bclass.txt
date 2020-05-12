@@ -1,0 +1,212 @@
+Number String Boolean undefined Null Object
+
+
+LHS:不会引用错误 //在当前作用域没找到，一级级往上找，找不到就在最外一级全局一个 
+RHS:
+	转换字符串：
+		variable.toString(); //转字符串
+		variable.toString(); 		//null和undefined不能用toString();
+		String(variable); //都能转换
+		 + '' //加个空串//拼接转换
+
+	转换数字：
+		Number(variable); // 当字符串里面有任何一个不是数字都返回NAN
+			not a number //除非字符串里面全是数字否则
+		parseInt(variable); //不能转换布尔值。返回Nan
+			//在转换字符串的时候，如果一开始遇到数字就返回截止遇到非数字之前的数字，如果一开始没遇到数字就返回NAN
+		parseFloat(variable); //同上 可以处理一个小数点 例：123.45.67 转换出来就是123.45
+
+
+
+		+str || -str ：例如console.log(+'123'); //123 //所以可以转换boolean值 //如果字符串中除了 数字 正负号 一个小数点 之外有其他类型的东西则返回Nan
+		str + 0 ://如果一边是数值类型，一边是字符串类型，会先把数值类型转换成字符串 再进行字符串的拼接
+		不会转换成数字，会在任意str后面加0 例如：console.log('12a' + 0); //'12a0'
+		str - 0://如果一边是数值类型，一边是字符串类型，会先把字符串类型转换成数值类型，此时若转换失败，则返回Nan，若成功，再进行字符串的拼接
+
+	转换Boolean：
+		Boolean(variable);//Boolean(str);如果str非空就返回true，如果空串就返回false
+			//转换数值时，非0则true；0就false
+			//转换Object时，为null为false
+			//为false的情况分别为：null undefined 0 '' NaN
+		隐式转换：return 判断；  //还有！str; var isTrue = !str;
+
+
+	除法://如果 variable / 0； 返回Infinity
+
+	取余：//如果 variab % 0； 返回NaN
+
+
+	一元操作符：只有一个操作数的运算符
+			   自加：variable++：先进行其他运算结尾再+1 || ++variable:先自加1再进行其他运算
+			   自减:variable--：先进行其他运算结尾再-1 || --variable：先自减1再进行其他运算
+	二元运算符：两个操作数的运算符
+	逻辑运算符：
+			  1.&&与：全true为true，有false为false
+			  2.||或：有true为true，全false为false
+			  3.！非：
+	关系运算符：
+			  1.大于:>
+			  		大于等于:=>
+			  2.小于:<
+			  		小于等于:=<
+			  3.等于:==  //不管类型         12 '12'
+			  		===： //强类型
+			  4.不等于:!= //不管类型
+			  		!==: //强类型
+
+	运算符的优先级：
+				  Level-1.圆括号 n/a
+				  Level-2.成员访问 需计算的成员访问 new(带参数列表)//n/a 函数调用
+				  Level-3.new(无参数列表) 从右到左
+				  Level-4.后置递增(运算符在后) 后置递减(运算符在后)
+				  Level-5.逻辑非:! 按位非:~ 一元加法 一元减法 前置递增:++a 前置递减:--a typeof void delete await 从右到左
+				  Level-6.幂 从右到左
+				  Level-7.乘法 除法 取模
+				  Level-8.加法 减法
+				  Level-9.按位左移:<< 按位右移:>> 无符号右移:>>>
+				  Level-10.小于 小于等于 大于 大于等于 in instanceof
+				  Level-11.等号 非等号 全等号 非全等号
+				  Level-12.按位与:&
+				  Level-13.按位异或:^
+				  Level-14.按位或:|
+				  Level-15.逻辑与:&&
+				  Level-16.逻辑或:||
+				  Level-17.条件运算符 ...?...:a:b; 从右到左
+				  Level-18.赋值 从右到左
+				  Level-19.yield yield* 从右到左
+				  Level-20.展开运算符 n/a
+				  Level-21.逗号
+
+	表达式和语句：
+		表达式：表达式可以产生一个值，有可能是运算、函数调用、有可能是字面量。表达式可以放在任何需要值的地方。
+		语句：语句可以理解为一个行为。
+		流程控制：
+				1.if(表达式){}
+				2.if(表达式){//成立执行语句}else{//否则执行}
+				3.if(条件1){//条件1成立执行语句}else if(条件2){//条件2成立执行语句}else if(条件3){//条件3成立执行语句}else{//剩下的执行语句} //elseif 的语句仅在之前的 if 或 elseif 的表达式值为 FALSE，而当前的 elseif 表达式值为 TRUE 时执行。
+				4.switch(变量){case 常量1：语句1；case 常量2：语句2;case 常量3：语句3} //if是范围，switch是值
+
+	循环：
+		while(判断){
+			执行语句；
+		}
+		do{
+			执行语句；
+		}while(判断);
+		for(初始化;判断;迭代){
+			执行语句；
+		}
+
+
+		数组：var arry = [];
+
+
+		传参引用：不会改变实参数值，是实参的值传给了形参，并不会改变实参的值。
+
+
+		函数：1.函数申明：例如: fuction fname(){}
+			  2.函数表达式：例如： var fname = function (){}
+			  3.自调用：例如：(function(){})()
+
+
+			  IIFE: var a = 1;
+			  		(function foo(){
+			  		var a = 2;
+			  		console.log(a);//2
+			  		})();
+			  		console.log(a);//1
+
+			  		var a = 1;
+			  		(function foo(){
+			  		var a = 3;
+			  		console.log(a);//3
+			  		}());
+			  		console.log(a);//1
+
+			  IIFE:把函数表达式当做函数调用并且传值进去
+			  		var a = 1;
+			  		(function IIFE(gloabl){
+			  		var a = 3;
+			  		console.log(a);//3
+			  		console.log(global.a);1
+			  		})(window);
+			  		console.log(a);//1
+
+			  UMD:
+			  		var a = 1;
+			  		(function IIFE(def){
+			  		def(window);
+			  		})(function def(global){
+			  		var a = 3;
+			  		console.log(a);//3
+			  		console.log(global.a);//1
+			  		});
+			  		console.log(a);//1
+
+
+
+			  try{}catch(err){}:
+			  try{undefined();//执行一个非法操作来强制制造一个异常}catch(err){
+			  console.log(err);//能够正常执行！
+			  }
+			  console.log(err);//ReferenceError: err not found
+
+			  //当在同一个作用域有多个try{}catch{}时，如果catch用同样的标识符名称声明错误变量式，静态检查工具会发出警告
+
+
+
+			  let:可以将变量绑定在所在的任意作用域中
+			  		var foo = true;
+			  		if (foo) {
+			  		let bar = foo * 2;
+			  		bar = something(bar);
+			  		console.log(bar);
+			  		}
+			  		console.log(bar);//ReferenceError
+
+
+			  		{let bar = foo * 2;
+			  		bar = something(bar);
+			  		console.log(bar);}
+			  		console.log(bar);//ReferenceError
+
+
+
+	编译过程：首先提升变量声明
+			 其次提升函数声明
+			 最后剩下的赋值以此顺延
+
+			 例如：console.log(a);
+			 	  function a(){
+			 	  console.log("aaaaaaa");
+			 	  }
+			 	  var a = 1;
+			 	  console.log(a);
+
+			 	  预解析过程：var a;
+			 	  			 function a(){
+			 	  			 console.log("aaaaaa");
+			 	  			 }
+			 	  			 console.log(a); //在函数名和变量名相同时，优先函数 //打印整个函数
+			 	  			 a = 1;
+			 	  			 console.log(a); //1
+
+
+			 	  var a = 25;
+			 	  function a(){
+			 	  alert(a);   //undefined
+			 	  var a = 25;
+			 	  }
+			 	  a();
+
+
+			 	  预解析过程：var a;
+			 	  			 function a(){
+			 	  			 var a;
+			 	  			 alert(a);
+			 	  			 a = 10;
+			 	  			 }
+			 	  			 a = 25;
+			 	  			 a();
+
+	prompt('v1','v2'):弹出对话框让用户输入；v1为显示给用户的内容，v2为提示框。//让用户知道需要什么内容//指定输入定义域 //使用例子：var str = prompt('something','explain');

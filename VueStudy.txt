@@ -1,0 +1,144 @@
+1.安转
+	...
+2.开始使用
+	...
+		 1.var app = new Vue({
+		 	el: '元素',
+		 	data: {
+		 		message: '内容'
+		 	}
+		 });
+3.鼠标悬停显示动态绑定的提示信息(类似于img的alt)
+4.指令
+		1.v-bind: 动态绑定
+			带前缀 v- 表示Vue的attribute
+		2.v-if: 判断
+			v-if="元素" //data里面的元素 bool 型
+		3.v-for: 循环 //v-for="item in dataElement"       //输出{{ item.text }}
+			data里面的元素 dataElement: [{text:'ceshi1'},{text:'ceshi2'},{text:'ceshi3'},{text:'ceshi4'}]
+			在console控制台里面 输入app.dataElement.push({text:'ceshi5'}) //页面会重新加上ceshi5
+		4.v-on: 事件监听器 //v-on:click="reverseMessage"
+			methods: {
+				reverseMessage: function () {
+					this.message = this.message.split('').reverse().join('');
+				}
+			}
+		5.v-model: 表单输入和应用状态之间的双向绑定 // <p>{{ message }}</p><input v-model="message" type="text" />
+			//怎么单向绑定
+
+
+5.组件化应用构建
+	1.注册组件
+		1.Vue.component('s-tpl',{
+			template: '<li>这就是一个小型组件的内容</li>'
+		})
+		2.var app = new Vue(...)
+		3.插入页面
+			<ol>
+				<s-tpl></s-tpl> //组件s-item的实例
+			</ol>
+		4.对象化
+			1.自定义的prop //[(attribute)]
+			Vue.component('s-tpl',{
+				props: ['item'], //prop类似于attribute 所以可以放指令 就像 v-bind:item="dataElement" //需要注意的是 组件的props 不要缺了s
+				template: '<li>{{ item.text }}</li>'
+			})
+
+
+6.数据和方法
+	1.当一个Vue实例被创建时,data对象的property加入到响应式系统中, property被改变 页面别进行相应的改变.
+		// var a = {data : 1};
+		// var vm = new Vue({
+			data: {
+				b : a;
+			}
+		});
+		//修改 a.data,则b.data也会改变
+		//修改 b.data,则a.data也会改变
+
+		需要注意的是:
+					1.一开始没有的 data 后增加的话,是不会重新渲染视图的,所以需要先 放一个 空值的 属性
+					//data: {
+					  newTodoText: '',
+					  visitCount: 0,
+					  hideCompletedTodos: false,
+					  todos: [],
+					  error: null
+					}
+		使用 Object.freeze(obj); 会阻止修改现有的property,则 响应式系统 无法追踪property的变化
+		var obj = {foo: 'bar'};
+		Object.freeze(obj);
+		var vm = new Vue({
+			el:'#example',
+			data:{
+				foo: obj
+			}
+		})
+		//查看方法 v-model="ceshi.foo"  并不能实现同步的改变
+
+	2.可以用$ 表示Vue里面的对象
+		//比如: app.$data.hah === ceshi   //true
+		//app.$el == document.getElementById("app")
+
+	3.钩子(监听不同阶段,运行不同函数)
+		1.created钩子:在一个实例被创建之后运行的
+		2.mounted钩子:
+		3.updated
+		4.destroyed
+		5.钩子里用this指向当前的Vue实例
+		6.不要在选项 property 或回调上使用箭头函数，比如 created: () => console.log(this.a) 或 vm.$watch('a', newValue => this.myMethod())。
+		因为箭头函数并没有 this，this 会作为变量一直向上级词法作用域查找，直至找到为止，
+		经常导致 Uncaught TypeError: Cannot read property of undefined
+		或 Uncaught TypeError: this.myMethod is not a function 之类的错误。
+
+####################################################################################################################################################################
+		生命周期:
+		1.new Vue()
+		2.初始化 时间&生命周期
+			//beforeCreate
+		3.初始化 注入&校验
+			//created
+		4.是否指定"el"元素选项?
+			1.否
+				//当调用 vm.$mount(el)函数时 ----------|
+		5.(上面是) 是否指定"template"模板选项    <------|
+			1.是
+				将template编译到render函数中(渲染)
+			2.否
+				将el外部的html作为template编译
+			//beforeMount
+		6.创建vm.$el并用其替换"el"
+			//mounted
+		7.挂载完毕
+			当data修改时
+				//beforeUpdate
+			虚拟DOM重新渲染并应用更新
+				//updated
+		8.当调用vm.$destroy()函数时
+			//beforeDestroy
+		9.解除绑定 销毁子组件以及事件监听器
+		10.销毁完毕
+			//destroyed
+####################################################################################################################################################################
+
+	4.v-once 不在更新数据
+		//当时会影响 该DOM下所有的数据更新
+	5.{{data}} 只会被解析成字符串,并不能 渲染
+		v-html="data" //才会被重新渲染
+	6.为了避免xss攻击,不要将用户 输入的内容 v-html 到网页
+	7.{{data}} 并不能作为attribute,需要用v-bind
+		v-bind:id="app"
+		v-bind:disabled="isDisabled"   //只有isDisabled 是true的情况下才会被渲染出来,剩下的都不会被渲染出来
+	8.{{}}
+			//里面可以进行js语句
+			{{ message.split('').reverse().join('') }}
+			{{ number+1 }}
+			{{ ok ? 'yes' : 'no' }}
+			<div v-bind:id="'list_'+id"></div>
+			//需要注意的是 只能是单个表达式,if或声明变量都是无效的
+
+注意事项:
+		1.想要生效都得放在el的里面
+		2.v-if 如果flase 会删除内容 然后加一个空白注释行
+		  v-show 就是display:none
+		3.组件的props不要缺了s
