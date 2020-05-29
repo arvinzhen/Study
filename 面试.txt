@@ -4,3 +4,28 @@
 3.解决思路: int arr[] = {1,1,2,3,4};
 4.把arr按照index读进栈,之后每次的arr[i]和栈里面的比较,相同的读取下一个,不同的放进去
 	之后的面试一定要淡定,多想一会
+
+
+2020.5.29
+1.今天就问了是不是要996 ~.~
+笔直裂开
+今天写了字符串的最长子串,花了一个小时
+看了最优解,裂开了.
+最优解的想法是,字符串的key作为状态,value作为索引,
+假设字符串叫   str   下标为 str.key  ,对应的字符为  str.key.value
+现在有一个数组arr,长度为256,初始化为-1,
+假设 起始位置为 start = 0,初始子串长度curlen = 0,最终长度为res = 0
+每次把 arr[str.key.value] 赋值给 temp   .temp表示 value对应的下标key
+然后比较   temp 和 start 的大小
+如果 temp 小于 start, 表示没有重复
+	curlen += 1;
+否则
+	curlen = temp - i;//
+	start = temp + 1; //从上一次起始状态右移一位
+arr[str.key.value] = i; //arr的下标为str.i.value处记作新的初始状态
+res = curlen > res ? curlen : red; //每轮的最大长度
+
+
+//建一个字母 k-v数组,初始化为-1
+//字母对应的值为 字母在字符串中的位置
+//每次 有重复就把 长度初始位置=重复的位置+1
